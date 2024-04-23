@@ -45,8 +45,7 @@ namespace Dealership.Core
                 case CommandType.RemoveComment:
                     return new RemoveCommentCommand(commandParameters, repository);
                 case CommandType.ShowUsers:
-                    // ToDo
-                    throw new NotImplementedException();
+                    return new ShowUsersCommand(repository);
                 case CommandType.ShowVehicles:
                     return new ShowVehiclesCommand(commandParameters, repository);
                 default:

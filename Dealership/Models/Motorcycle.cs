@@ -48,9 +48,9 @@ namespace Dealership.Models
 
 
             StringBuilder sb = new StringBuilder();
-            sb.AppendLine($"#. Motorcycle:");
+            sb.AppendLine($". Motorcycle:");
             sb.Append(base.ToString());
-            sb.AppendLine($"Seats: {Category}");
+            sb.AppendLine($"  Category: {Category}");
 
             return sb.ToString();
         }

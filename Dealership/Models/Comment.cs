@@ -31,10 +31,10 @@ namespace Dealership.Models
             //  User: pesho
             //----------
             StringBuilder sb = new StringBuilder();
-            sb.AppendLine("----------");
-            sb.AppendLine(Content);
-            sb.AppendLine($"  User: {Author}");
-            sb.AppendLine("----------");
+            sb.AppendLine("    ----------");
+            sb.AppendLine($"    {Content}");
+            sb.AppendLine($"      User: {Author}");
+            sb.AppendLine("    ----------");
             return sb.ToString();
         }
     }

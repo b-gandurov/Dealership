@@ -47,9 +47,9 @@ namespace Dealership.Models
 
 
             StringBuilder sb = new StringBuilder();
-            sb.AppendLine($"#. Truck:");
+            sb.AppendLine($". Truck:");
             sb.Append(base.ToString());
-            sb.AppendLine($"Weight Capacity: {WeightCapacity}t");
+            sb.AppendLine($"  Weight Capacity: {WeightCapacity}t");
 
             return sb.ToString();
         }

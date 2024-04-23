@@ -123,10 +123,10 @@ namespace Dealership.Models
             //Price: ${ price}
 
             StringBuilder sb = new StringBuilder();
-            sb.AppendLine($"Make: {Make}");
-            sb.AppendLine($"Model: {Model}");
-            sb.AppendLine($"Wheels: {Wheels}");
-            sb.AppendLine($"Price: ${Price}");
+            sb.AppendLine($"  Make: {Make}");
+            sb.AppendLine($"  Model: {Model}");
+            sb.AppendLine($"  Wheels: {Wheels}");
+            sb.AppendLine($"  Price: ${Price}");
 
             return sb.ToString();
         }

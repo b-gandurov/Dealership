@@ -16,7 +16,7 @@ namespace Dealership.Models
 
         private const int NameMinLength = 2;
         private const int NameMaxLength = 20;
-        private const string InvalidNameError = "name must be between 2 and 20 characters long!";
+        private const string InvalidNameError = "{0} must be between 2 and 20 characters long!";
 
         private const int PasswordMinLength = 5;
         private const int PasswordMaxLength = 30;
@@ -60,7 +60,7 @@ namespace Dealership.Models
                 {
                     throw new InvalidUserInputException("FirstName cannot be null or empty!");
                 }
-                Validator.ValidateIntRange(value.Length, NameMinLength, NameMaxLength, InvalidNameError);
+                Validator.ValidateIntRange(value.Length, NameMinLength, NameMaxLength, string.Format(InvalidNameError, "Firstname"));
                 _firstName = value;
             }
 
@@ -75,7 +75,7 @@ namespace Dealership.Models
                 {
                     throw new InvalidUserInputException("LastName cannot be null or empty!");
                 }
-                Validator.ValidateIntRange(value.Length, NameMinLength, NameMaxLength, InvalidNameError);
+                Validator.ValidateIntRange(value.Length, NameMinLength, NameMaxLength, string.Format(InvalidNameError, "Lastname"));
                 _lastName = value;
             }
 
@@ -109,12 +109,13 @@ namespace Dealership.Models
 
         public void AddVehicle(IVehicle vehicle)
         {
-            if (Role==Role.Admin)
+            if (Role == Role.Admin)
             {
                 throw new AuthorizationException(AdminCannotAddVehicles);
-            }else if (Role==Role.Normal && _vehicles.Count>= MaxVehiclesToAdd)
+            }
+            else if (Role == Role.Normal && _vehicles.Count >= MaxVehiclesToAdd)
             {
-                throw new AuthorizationException(NotAnVipUserVehiclesAdd);
+                throw new AuthorizationException(string.Format(NotAnVipUserVehiclesAdd, MaxVehiclesToAdd));
             }
             _vehicles.Add(vehicle);
         }
@@ -123,7 +124,8 @@ namespace Dealership.Models
         {
             StringBuilder sb = new StringBuilder();
             sb.AppendLine($"--USER {Username}--");
-            if (_vehicles.Count==0) {
+            if (_vehicles.Count == 0)
+            {
                 sb.AppendLine(NoVehiclesHeader);
                 return sb.ToString();
             }
@@ -132,6 +134,19 @@ namespace Dealership.Models
             {
                 sb.Append(vehicleNum++);
                 sb.AppendLine(vehicle.ToString());
+                if (vehicle.Comments.Count == 0)
+                {
+                    sb.AppendLine("    --NO COMMENTS--");
+                }
+                else
+                {
+                    sb.AppendLine("    --COMMENTS--");
+                    foreach (var comment in vehicle.Comments)
+                    {
+                        sb.Append(comment.ToString());
+                    }
+                    sb.AppendLine("    --COMMENTS--");
+                }
             }
 
             return sb.ToString();
@@ -139,31 +154,25 @@ namespace Dealership.Models
 
         public void RemoveComment(IComment commentToRemove, IVehicle vehicleToRemoveComment)
         {
-            if (commentToRemove.Author!=Username)
+            if (commentToRemove.Author != Username)
             {
                 throw new AuthorizationException(YouAreNotTheAuthor);
             }
-            foreach (var vehicle in _vehicles)
-            {
-                if(vehicle==vehicleToRemoveComment)
-                {
-                    vehicle.RemoveComment(commentToRemove);
-                    break;
-                }
-            }
-            
+
+            vehicleToRemoveComment.RemoveComment(commentToRemove);
+
         }
 
         public void RemoveVehicle(IVehicle vehicle)
         {
             foreach (var vi in _vehicles)
             {
-                if(vi==vehicle)
+                if (vi == vehicle)
                 {
                     _vehicles.Remove(vi);
                     break;
                 }
-                
+
             }
         }
 

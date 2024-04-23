@@ -6,6 +6,7 @@ using System.Net.Http.Headers;
 using System.Security.AccessControl;
 using System.Text;
 using Dealership.Exceptions;
+using System.Diagnostics.Metrics;
 
 namespace Dealership.Commands
 {
@@ -34,9 +35,14 @@ namespace Dealership.Commands
         private string ShowUsers()
         {
             StringBuilder sb = new StringBuilder();
+            sb.AppendLine("--USERS--");
+            int userCount = 1;
             foreach (var user in this.Repository.Users)
             {
-                sb.AppendLine(user.Username);
+
+                string strToAppend = 
+                    $"{userCount++}. Username: {user.Username}, FullName: {user.FirstName} {user.LastName}, Role: {user.Role}";
+                sb.AppendLine(strToAppend);
             }
             return sb.ToString();
         }
