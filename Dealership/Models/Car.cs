@@ -3,7 +3,7 @@ using Dealership.Models.Contracts;
 
 namespace Dealership.Models
 {
-    public class Car : ICar, IVehicle
+    public class Car : Vehicle, ICar
     {
         public const int MakeMinLength = 2;
         public const int MakeMaxLength = 15;
@@ -19,15 +19,5 @@ namespace Dealership.Models
         public const string InvalidSeatsError = "Seats must be between 1 and 10!";
 
         public int Seats => throw new System.NotImplementedException();
-
-        public string Make => throw new System.NotImplementedException();
-
-        public string Model => throw new System.NotImplementedException();
-
-        public VehicleType Type => throw new System.NotImplementedException();
-
-        public int Wheels => throw new System.NotImplementedException();
-
-        //ToDo
     }
 }
