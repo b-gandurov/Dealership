@@ -2,6 +2,7 @@
 using Dealership.Models.Contracts;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
@@ -10,13 +11,16 @@ using System.Threading.Tasks;
 
 namespace Dealership.Models
 {
-    public abstract class Vehicle : IVehicle, IPriceable
+    public abstract class Vehicle : IVehicle, IPriceable, ICommentable
     {
         private string _make;
         private string _model;
         private VehicleType _vehicleType;
         private int _wheels;
         private decimal _price;
+        private IList<IComment> _comments = new List<IComment>();
+
+        
         public Vehicle(string make, string model, decimal price, VehicleType vehicleType)
         {
             Make = make;
@@ -76,16 +80,39 @@ namespace Dealership.Models
             get { return _price; }
             private set
             {
-                if (value!=null)
-                {
-                    _price = value;
-                }
-                else
-                {
-                    throw new InvalidUserInputException("Price cannot be null!");
-                }
+                _price = value;
 
             }
+        }
+
+        public IList<IComment> Comments => new List<IComment>(_comments);
+
+
+        public void AddComment(IComment comment)
+        {
+            _comments.Add(comment);
+        }
+
+        public void RemoveComment(IComment comment)
+        {
+            _comments.Remove(comment);
+        }
+
+        public string PrintComments()
+        {
+            StringBuilder sb = new StringBuilder();
+            if (_comments.Count == 0)
+            {
+                sb.AppendLine("--NO COMMENTS--");
+                return sb.ToString();
+            }
+            sb.AppendLine("--COMMENTS--");
+            foreach (IComment comment in _comments)
+            {
+                sb.AppendLine(comment.ToString());
+            }
+            sb.AppendLine("--COMMENTS--");
+            return sb.ToString();
         }
 
         public override string ToString()

@@ -1,6 +1,6 @@
 ﻿namespace Dealership.Models.Contracts
 {
-    public interface IVehicle
+    public interface IVehicle:ICommentable
     {
         string Make { get; }
 

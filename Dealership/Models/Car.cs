@@ -3,6 +3,7 @@ using Dealership.Models;
 using Dealership.Models.Contracts;
 using System.Diagnostics;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace Dealership.Models
@@ -38,6 +39,7 @@ namespace Dealership.Models
         public int Seats
         {
             get { return _seats; }
+            
         }
 
         public override string ToString()
@@ -53,9 +55,11 @@ namespace Dealership.Models
             sb.AppendLine($"#. Car:");
             sb.Append(base.ToString());
             sb.AppendLine($"Seats: {Seats}");
+            
 
             return sb.ToString();
         }
+
     }
 
    
