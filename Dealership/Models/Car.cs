@@ -1,5 +1,9 @@
 ﻿
+using Dealership.Models;
 using Dealership.Models.Contracts;
+using System.Diagnostics;
+using System.Reflection;
+using System.Text;
 
 namespace Dealership.Models
 {
@@ -17,7 +21,43 @@ namespace Dealership.Models
         public const int MinSeats = 1;
         public const int MaxSeats = 10;
         public const string InvalidSeatsError = "Seats must be between 1 and 10!";
+        private readonly int _seats;
 
-        public int Seats => throw new System.NotImplementedException();
+        public Car(string make, string model, decimal price,int seats) 
+            : base(make, model, price, VehicleType.Car)
+        {
+            
+            Validator.ValidateIntRange(make.Length,MakeMinLength, MakeMaxLength, InvalidMakeError);
+            Validator.ValidateIntRange(model.Length, ModelMinLength, ModelMaxLength,  InvalidModelError);
+            Validator.ValidateDecimalRange(price, MinPrice, MaxPrice,  InvalidPriceError);
+            Validator.ValidateIntRange(seats, MinSeats, MaxSeats,  InvalidSeatsError);
+            _seats = seats;
+        }
+
+        public int Seats
+        {
+            get { return _seats; }
+        }
+
+        public override string ToString()
+        {
+            //#. Car:
+            //Make: { make}
+            //Model: { model}
+            //Wheels: { wheels}
+            //Price: ${ price}
+            //Seats: { seats}
+
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine($"#. Car:");
+            sb.Append(base.ToString());
+            sb.AppendLine($"Seats: {Seats}");
+
+            return sb.ToString();
+        }
     }
+
+   
 }
+
+

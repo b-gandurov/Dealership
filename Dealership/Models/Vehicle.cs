@@ -1,7 +1,9 @@
 ﻿using Dealership.Models.Contracts;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -50,6 +52,22 @@ namespace Dealership.Models
         {
             get { return _price; }
             private set { _price = value; }
+        }
+
+        public override string ToString()
+        {
+            //Make: {make}
+            //Model: { model}
+            //Wheels: { wheels}
+            //Price: ${ price}
+
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine($"Make: {Make}");
+            sb.AppendLine($"Model: {Model}");
+            sb.AppendLine($"Wheels: {Wheels}");
+            sb.AppendLine($"Price: ${Price}");
+
+            return sb.ToString();
         }
     }
 }
