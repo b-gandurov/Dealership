@@ -9,18 +9,18 @@ namespace Dealership.Models
         public const int CommentMinLength = 3;
         public const int CommentMaxLength = 200;
         public const string InvalidCommentError = "Content must be between 3 and 200 characters long!";
-        private string _contenet;
+        private string _content;
         private string _author;
 
         public Comment(string contenet, string author)
         {
             Validator.ValidateIntRange(contenet.Length, CommentMinLength, CommentMaxLength, InvalidCommentError);
-            _contenet = contenet;
+            _content = contenet;
             _author = author;
 
         }
 
-        public string Content => _contenet;
+        public string Content => _content;
 
         public string Author => _author;
 

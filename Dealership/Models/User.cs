@@ -106,6 +106,16 @@ namespace Dealership.Models
             vehicleToAddComment.AddComment(commentToAdd);
 
         }
+        public void RemoveComment(IComment commentToRemove, IVehicle vehicleToRemoveComment)
+        {
+            if (commentToRemove.Author != Username)
+            {
+                throw new AuthorizationException(YouAreNotTheAuthor);
+            }
+
+            vehicleToRemoveComment.RemoveComment(commentToRemove);
+
+        }
 
         public void AddVehicle(IVehicle vehicle)
         {
@@ -118,6 +128,20 @@ namespace Dealership.Models
                 throw new AuthorizationException(string.Format(NotAnVipUserVehiclesAdd, MaxVehiclesToAdd));
             }
             _vehicles.Add(vehicle);
+        }
+
+
+        public void RemoveVehicle(IVehicle vehicle)
+        {
+            foreach (IVehicle vi in _vehicles)
+            {
+                if (vi == vehicle)
+                {
+                    _vehicles.Remove(vi);
+                    break;
+                }
+
+            }
         }
 
         public string PrintVehicles()
@@ -154,28 +178,5 @@ namespace Dealership.Models
             return sb.ToString();
         }
 
-        public void RemoveComment(IComment commentToRemove, IVehicle vehicleToRemoveComment)
-        {
-            if (commentToRemove.Author != Username)
-            {
-                throw new AuthorizationException(YouAreNotTheAuthor);
-            }
-
-            vehicleToRemoveComment.RemoveComment(commentToRemove);
-
-        }
-
-        public void RemoveVehicle(IVehicle vehicle)
-        {
-            foreach (IVehicle vi in _vehicles)
-            {
-                if (vi == vehicle)
-                {
-                    _vehicles.Remove(vi);
-                    break;
-                }
-
-            }
-        }
     }
 }

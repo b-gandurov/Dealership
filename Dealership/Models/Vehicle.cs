@@ -20,7 +20,7 @@ namespace Dealership.Models
         private decimal _price;
         private IList<IComment> _comments = new List<IComment>();
 
-        
+
         public Vehicle(string make, string model, decimal price, VehicleType vehicleType)
         {
             Make = make;
@@ -36,13 +36,13 @@ namespace Dealership.Models
             {
                 if (!string.IsNullOrEmpty(value))
                 {
-                    _make=value;
+                    _make = value;
                 }
                 else
                 {
                     throw new InvalidUserInputException("Make cannot be null or empty!");
                 }
-                
+
             }
         }
 
@@ -66,7 +66,18 @@ namespace Dealership.Models
         public VehicleType Type
         {
             get { return _vehicleType; }
-            private set { _vehicleType = value; }
+            private set
+            {
+                if (Enum.TryParse(value.ToString(), true, out VehicleType result))
+                {
+                    _vehicleType = result;
+                }
+                else
+                {
+                    throw new InvalidUserInputException("No such vehicle type");
+                }
+
+            }
         }
 
         public int Wheels
