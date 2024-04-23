@@ -44,17 +44,11 @@ namespace Dealership.Models
 
         public override string ToString()
         {
-            //#. Car:
-            //Make: { make}
-            //Model: { model}
-            //Wheels: { wheels}
-            //Price: ${ price}
-            //Seats: { seats}
 
             StringBuilder sb = new StringBuilder();
             sb.AppendLine($". Car:");
             sb.Append(base.ToString());
-            sb.AppendLine($"  Seats: {Seats}");
+            sb.Append($"  Seats: {Seats}");
             
 
             return sb.ToString();

@@ -88,7 +88,7 @@ namespace Dealership.Models
             {
                 if (string.IsNullOrEmpty(value))
                 {
-                    throw new InvalidUserInputException("LastName cannot be null or empty!");
+                    throw new InvalidUserInputException("Password cannot be null or empty!");
                 }
                 Validator.ValidateIntRange(value.Length, PasswordMinLength, PasswordMaxLength, InvalidPasswordLengthError);
                 Validator.ValidateSymbols(value, PasswordPattern, InvalidPasswordFormatError);

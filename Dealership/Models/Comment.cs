@@ -26,10 +26,6 @@ namespace Dealership.Models
 
         public override string ToString()
         {
-            //----------
-            //Amazing speed and handling!
-            //  User: pesho
-            //----------
             StringBuilder sb = new StringBuilder();
             sb.AppendLine("    ----------");
             sb.AppendLine($"    {Content}");

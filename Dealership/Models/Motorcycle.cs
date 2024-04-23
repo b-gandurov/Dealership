@@ -39,18 +39,10 @@ namespace Dealership.Models
 
         public override string ToString()
         {
-            //#. Motorcycle:
-            //Make: { make}
-            //Model: { model}
-            //Wheels: { wheels}
-            //Price: ${ price}
-            //Category: { category}
-
-
             StringBuilder sb = new StringBuilder();
             sb.AppendLine($". Motorcycle:");
             sb.Append(base.ToString());
-            sb.AppendLine($"  Category: {Category}");
+            sb.Append($"  Category: {Category}");
 
             return sb.ToString();
         }

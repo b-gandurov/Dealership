@@ -37,19 +37,10 @@ namespace Dealership.Models
 
         public override string ToString()
         {
-            //#. Truck:
-            //Make: {make}
-            //Model: {model}
-            //Wheels: {wheels}
-            //Price: ${price}
-            //Weight Capacity: {weightCapacity}t
-
-
-
             StringBuilder sb = new StringBuilder();
             sb.AppendLine($". Truck:");
             sb.Append(base.ToString());
-            sb.AppendLine($"  Weight Capacity: {WeightCapacity}t");
+            sb.Append($"  Weight Capacity: {WeightCapacity}t");
 
             return sb.ToString();
         }
