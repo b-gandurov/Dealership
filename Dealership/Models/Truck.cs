@@ -1,7 +1,10 @@
 ﻿
+using Dealership.Models.Contracts;
+using System.Text;
+
 namespace Dealership.Models
 {
-    public class Truck
+    public class Truck : Vehicle, ITruck
     {
         public const int MakeMinLength = 2;
         public const int MakeMaxLength = 15;
@@ -15,7 +18,40 @@ namespace Dealership.Models
         public const int MinCapacity = 1;
         public const int MaxCapacity = 100;
         public const string InvalidCapacityError = "Weight capacity must be between 1 and 100!";
+        private readonly int _weightCapacity;
 
-        //ToDo
+        public Truck(string make, string model, decimal price, int weightCapacity)
+            : base(make, model, price, VehicleType.Truck)
+        {
+            Validator.ValidateIntRange(make.Length, MakeMinLength, MakeMaxLength, InvalidMakeError);
+            Validator.ValidateIntRange(model.Length, ModelMinLength, ModelMaxLength, InvalidModelError);
+            Validator.ValidateDecimalRange(price, MinPrice, MaxPrice, InvalidPriceError);
+            Validator.ValidateIntRange(weightCapacity, MinCapacity, MaxCapacity, InvalidCapacityError);
+            _weightCapacity = weightCapacity;
+        }
+
+        public int WeightCapacity
+        {
+            get { return _weightCapacity; }
+        }
+
+        public override string ToString()
+        {
+            //#. Truck:
+            //Make: {make}
+            //Model: {model}
+            //Wheels: {wheels}
+            //Price: ${price}
+            //Weight Capacity: {weightCapacity}t
+
+
+
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine($"#. Truck:");
+            sb.Append(base.ToString());
+            sb.AppendLine($"Weight Capacity: {WeightCapacity}t");
+
+            return sb.ToString();
+        }
     }
 }

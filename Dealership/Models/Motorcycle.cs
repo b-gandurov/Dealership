@@ -1,7 +1,12 @@
 ﻿
+using Dealership.Models.Contracts;
+using System.Diagnostics;
+using System.Reflection;
+using System.Text;
+
 namespace Dealership.Models
 {
-    public class Motorcycle
+    public class Motorcycle : Vehicle, IMotorcycle
     {
         public const int MakeMinLength = 2;
         public const int MakeMaxLength = 15;
@@ -15,7 +20,40 @@ namespace Dealership.Models
         public const int CategoryMinLength = 3;
         public const int CategoryMaxLength = 10;
         public const string InvalidCategoryError = "Category must be between 3 and 10 characters long!";
+        private readonly string _category;
 
-        //ToDo
+        public Motorcycle(string make, string model, decimal price,string category) 
+            : base(make, model, price, VehicleType.Motorcycle)
+        {
+            Validator.ValidateIntRange(make.Length, MakeMinLength, MakeMaxLength, InvalidMakeError);
+            Validator.ValidateIntRange(model.Length, ModelMinLength, ModelMaxLength, InvalidModelError);
+            Validator.ValidateDecimalRange(price, MinPrice, MaxPrice, InvalidPriceError);
+            Validator.ValidateIntRange(category.Length, CategoryMinLength, CategoryMaxLength, InvalidCategoryError);
+            _category = category;
+        }
+
+        public string Category
+        {
+            get { return _category; }
+        }
+
+        public override string ToString()
+        {
+            //#. Motorcycle:
+            //Make: { make}
+            //Model: { model}
+            //Wheels: { wheels}
+            //Price: ${ price}
+            //Category: { category}
+
+
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine($"#. Motorcycle:");
+            sb.Append(base.ToString());
+            sb.AppendLine($"Seats: {Category}");
+
+            return sb.ToString();
+        }
+
     }
 }

@@ -32,6 +32,7 @@ namespace Dealership.Models
             Validator.ValidateDecimalRange(price, MinPrice, MaxPrice,  InvalidPriceError);
             Validator.ValidateIntRange(seats, MinSeats, MaxSeats,  InvalidSeatsError);
             _seats = seats;
+
         }
 
         public int Seats

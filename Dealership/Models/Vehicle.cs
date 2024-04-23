@@ -1,4 +1,5 @@
-﻿using Dealership.Models.Contracts;
+﻿using Dealership.Exceptions;
+using Dealership.Models.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -27,13 +28,35 @@ namespace Dealership.Models
         public string Make
         {
             get { return _make; }
-            private set { _make = value; }
+            private set
+            {
+                if (!string.IsNullOrEmpty(value))
+                {
+                    _make=value;
+                }
+                else
+                {
+                    throw new InvalidUserInputException("Make cannot be null or empty!");
+                }
+                
+            }
         }
 
         public string Model
         {
             get { return _model; }
-            private set { _model = value; }
+            private set
+            {
+                if (!string.IsNullOrEmpty(value))
+                {
+                    _model = value;
+                }
+                else
+                {
+                    throw new InvalidUserInputException("Model cannot be null or empty!");
+                }
+
+            }
         }
 
         public VehicleType Type
@@ -51,7 +74,18 @@ namespace Dealership.Models
         public decimal Price
         {
             get { return _price; }
-            private set { _price = value; }
+            private set
+            {
+                if (value!=null)
+                {
+                    _price = value;
+                }
+                else
+                {
+                    throw new InvalidUserInputException("Price cannot be null!");
+                }
+
+            }
         }
 
         public override string ToString()
@@ -69,5 +103,6 @@ namespace Dealership.Models
 
             return sb.ToString();
         }
+
     }
 }
