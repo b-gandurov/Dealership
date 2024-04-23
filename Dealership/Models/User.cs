@@ -40,14 +40,11 @@ namespace Dealership.Models
 
         public User(string username, string firstName, string lastName, string password, Role role)
         {
-            // User Validation Logic:
-            // In the User Class, the username is validated in the constructor because usernames are unique
-            // identifiers that should remain consistent and immutable once set. This ensures a stable and
-            // reliable identification mechanism throughout the user's lifecycle in the application.
-            // In contrast, attributes like first name, last name, and password are validated through
-            // setters to provide flexibility, allowing users to update these personal details as needed.
-            // This approach balances immutability for essential identifiers with flexibility for
-            // user-controlled attributes, enhancing usability without compromising data integrity.
+            // Username validation occurs in the constructor to ensure its immutability as a unique identifier,
+            // while first/last names and password are set via setters for flexibility.
+            // This allows users to update their personal details as necessary, maintaining user control
+            // over mutable attributes while securing the stability of their identity in the system.
+
 
             Validator.ValidateSymbols(username, UsernamePattern, InvalidUsernameFormatError);
             Validator.ValidateIntRange(username.Length, 2, 20, InvalidUsernameLengthError);

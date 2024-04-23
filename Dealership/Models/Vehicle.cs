@@ -20,14 +20,12 @@ namespace Dealership.Models
         private decimal _price;
         private IList<IComment> _comments = new List<IComment>();
 
-        // The constructors for vehicle models (Car, Truck, Motorcycle) incorporate validation to ensure
-        // that every vehicle instance is created in a valid state. This approach upholds the principle
-        // of immutability, critical for representing real-world, unmodifiable physical objects once
-        // they are created. By embedding these validations, we ensure that all properties meet specific
-        // criteria (e.g., value ranges, mandatory fields) right from the start, preventing any illegal
-        // states and guaranteeing the consistency of vehicle data throughout the application's lifecycle.
-        // This design choice simplifies maintenance and enhances reliability by making the vehicle objects
-        // predictable and their behavior error-free.
+
+        // Constructors validation logic will ensure each vehicle is created in a consistently valid state,
+        // upholding immutability for real-world, fixed objects. This embedded validation guarantees
+        // all properties meet predefined criteria, enhancing reliability, simplifying maintenance,
+        // and preventing illegal states.
+
 
 
         public Vehicle(string make, string model, decimal price, VehicleType vehicleType)
