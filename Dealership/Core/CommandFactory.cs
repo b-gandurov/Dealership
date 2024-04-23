@@ -49,7 +49,7 @@ namespace Dealership.Core
                 case CommandType.ShowVehicles:
                     return new ShowVehiclesCommand(commandParameters, repository);
                 default:
-                    throw new InvalidUserInputException($"Command with name: {commandType} doesn't exist!");
+                    throw new InvalidUserInputException($"Command with name: {commandLine.Split(' ')[0]} doesn't exist!");
             }
         }
 

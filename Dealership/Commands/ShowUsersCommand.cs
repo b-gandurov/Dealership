@@ -1,12 +1,8 @@
 ﻿
-using Dealership.Core;
 using Dealership.Core.Contracts;
 using Dealership.Exceptions;
-using System.Net.Http.Headers;
-using System.Security.AccessControl;
 using System.Text;
-using Dealership.Exceptions;
-using System.Diagnostics.Metrics;
+
 
 namespace Dealership.Commands
 {
@@ -46,8 +42,6 @@ namespace Dealership.Commands
             }
             return sb.ToString();
         }
-
-        //ToDo
 
     }
 }

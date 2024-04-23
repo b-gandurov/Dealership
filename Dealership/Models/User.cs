@@ -123,6 +123,7 @@ namespace Dealership.Models
         public string PrintVehicles()
         {
             StringBuilder sb = new StringBuilder();
+
             sb.AppendLine($"--USER {Username}--");
             if (_vehicles.Count == 0)
             {
@@ -130,6 +131,7 @@ namespace Dealership.Models
                 return sb.ToString();
             }
             int vehicleNum = 1;
+
             foreach (var vehicle in _vehicles)
             {
                 sb.Append(vehicleNum++);
@@ -165,7 +167,7 @@ namespace Dealership.Models
 
         public void RemoveVehicle(IVehicle vehicle)
         {
-            foreach (var vi in _vehicles)
+            foreach (IVehicle vi in _vehicles)
             {
                 if (vi == vehicle)
                 {
@@ -175,7 +177,5 @@ namespace Dealership.Models
 
             }
         }
-
-        //ToDo
     }
 }
